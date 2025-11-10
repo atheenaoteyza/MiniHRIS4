@@ -4,3 +4,5 @@ GET {{WebApplication11_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+GET {{WebApplication11_HostAddress}}/employees/test-employees
+Accept: application/json

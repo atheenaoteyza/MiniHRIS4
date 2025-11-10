@@ -134,3 +134,4 @@
 /Users/louise/Desktop/c#/MiniHRIS4/MiniHRIS4/obj/Debug/net8.0/WebApplication11.pdb
 /Users/louise/Desktop/c#/MiniHRIS4/MiniHRIS4/obj/Debug/net8.0/WebApplication11.genruntimeconfig.cache
 /Users/louise/Desktop/c#/MiniHRIS4/MiniHRIS4/obj/Debug/net8.0/ref/WebApplication11.dll
+/Users/louise/Desktop/c#/MiniHRIS4/MiniHRIS4/obj/Debug/net8.0/WebApplication11.sourcelink.json
