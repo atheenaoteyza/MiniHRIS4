@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MiniHRIS4.Models;
+using MiniHRIS4.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<MiniHRIS4Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MiniHRIS4Context")));
 
+builder.Services.AddScoped<MiniHRISServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
