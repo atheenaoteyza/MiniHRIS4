@@ -15,6 +15,8 @@ namespace MiniHRIS4.Models
         {
             modelBuilder.ApplyConfiguration(new EmployeeConfig());
             modelBuilder.ApplyConfiguration(new DepartmentConfig());
+
+            modelBuilder.Entity<Employee>().HasOne(a => a.Department).WithMany(a => a.Employees).HasForeignKey(a => a.DepartmentId);
         }
     }
 }
