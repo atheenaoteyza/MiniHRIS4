@@ -6,3 +6,10 @@ Accept: application/json
 ###
 GET {{WebApplication11_HostAddress}}/employees/test-employees
 Accept: application/json
+
+###
+GET {{WebApplication11_HostAddress}}/employees/db-error-test
+Accept: application/json
+###
+GET {{WebApplication11_HostAddress}}/employees/999
+Accept: application/json
