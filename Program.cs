@@ -16,6 +16,8 @@ builder.Services.AddDbContext<MiniHRIS4Context>(options => options.UseSqlServer(
 builder.Services.AddScoped<MiniHRISServices>();
 var app = builder.Build();
 
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
