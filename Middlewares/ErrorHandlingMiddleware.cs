@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using MiniHRIS4.Exceptions;
 
 
-
 public class ErrorHandlingMiddleware
 {
     private readonly RequestDelegate _next;

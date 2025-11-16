@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MiniHRIS4.DTOs;
 using MiniHRIS4.Models;
 using MiniHRIS4.Exceptions;
+using Serilog;
 
 namespace MiniHRIS4.Services
 {
@@ -16,6 +17,7 @@ namespace MiniHRIS4.Services
 
         public async Task<List<EmployeeDTO>> GetEmployeeDTOsAsync()
         {
+            Log.Information("Fetching employees...");
             return await _context.Employees.Include(a => a.Department).Select(a => new EmployeeDTO
             {
                 EmployeeId = a.EmployeeId,
@@ -36,9 +38,20 @@ namespace MiniHRIS4.Services
         public async Task<List<Employee>> DbErrorTest()
         {
             // deliberately use wrong query to trigger an exception
-            return await _context.Employees
+            try
+            {
+                Log.Information("Testing Db...");
+
+                return await _context.Employees
                  .FromSqlRaw("SELECT * FROM NonExistentTable")
                  .ToListAsync();
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "this is a database error");
+                throw;
+            }
 
 
         }
@@ -50,7 +63,12 @@ namespace MiniHRIS4.Services
                 .FirstOrDefaultAsync(e => e.EmployeeId == id);
 
             if (employee == null)
+            {
+                Log.Warning("Employee {EmployeeId} not found", id);
                 throw new NotFoundException("No employee found");
+
+            }
+            Log.Information("Successfully retrieved employee {EmployeeId}", id);
 
             // Map to DTO
             return new EmployeeDTO

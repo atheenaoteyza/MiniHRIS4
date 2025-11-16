@@ -1,8 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using MiniHRIS4.Models;
 using MiniHRIS4.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+.WriteTo.Console().WriteTo.File("Logs/log_.txt", rollingInterval: RollingInterval.Day)
+.Enrich.FromLogContext().CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 
@@ -15,6 +22,8 @@ builder.Services.AddDbContext<MiniHRIS4Context>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<MiniHRISServices>();
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
